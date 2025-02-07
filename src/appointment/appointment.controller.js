@@ -1,5 +1,6 @@
 import Pet from "../pet/pet.model.js";
 import Appointment from "../appointment/appointment.model.js";
+import { hash } from "argon2";
 import { parse } from "date-fns";
 
 export const saveAppointment = async (req, res) => {
@@ -55,4 +56,72 @@ export const saveAppointment = async (req, res) => {
       error 
     }); 
   }
-};
+}
+
+//LISTAR CITAS
+export const getCitas = async (req, res) => {
+  try{
+      const { limite = 5, desde = 0 } = req.query
+      const query = { status: "CREATED" }
+      const [total, appointments ] = await Promise.all([
+          Appointment.countDocuments(query),
+          Appointment.find(query)
+              .skip(Number(desde))
+              .limit(Number(limite))
+      ])
+      return res.status(200).json({
+          success: true,
+          total,
+          appointments
+      })
+  }catch(err){
+      return res.status(500).json({
+          success: false,
+          message: "ERROR AL LISTAR LAS CITAS",
+          error: err.message
+      })
+  }
+}
+
+//CANCELAR CITA POR ID
+export const cancelarCitas = async (req, res) => {
+    try {
+        const { uid } = req.params;
+        const  data  = req.body;
+
+        const user = await Appointment.findByIdAndUpdate(uid, data, { new: true });
+
+        res.status(200).json({
+            success: true,
+            msg: 'CITA ACTUALIZADA',
+            user,
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            msg: 'ERROR AL ACTUALIZAR EL ESTADO DE LA CITA',
+            error: err.message
+        });
+    }
+}
+
+export const actualizarCitas = async (req, res) => {
+    try {
+        const { uid } = req.params;
+        const  data  = req.body;
+
+        const appointment = await Appointment.findByIdAndUpdate(uid, data, { new: true });
+
+        res.status(200).json({
+            success: true,
+            msg: 'CITAS ACTUALIZADAS',
+            appointment,
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            msg: 'ERROR AL ACTUALIZAR lAS CITAS',
+            error: err.message
+        });
+    }
+}
