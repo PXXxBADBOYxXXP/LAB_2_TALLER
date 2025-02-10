@@ -142,7 +142,17 @@ JWT_SECRET=<tu_secreto_jwt>
       "status":"CANCELLED"
      }
     ```
-
+ - **Actualizar Cita**
+  - **URL:** `/adoptionSystem/v1/appointment/cancelarCita/:uid`
+  - **Método:** `PUT`
+  - **Cuerpo:**
+    ```json
+     {
+      "date": "2023-10-15T10:00:00Z",
+      "pet": "string",
+      "user": "string"
+     }
+    ```
 
 ## Funcionalidades Adicionales
 
