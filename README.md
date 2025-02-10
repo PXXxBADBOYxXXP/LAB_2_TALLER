@@ -129,6 +129,20 @@ JWT_SECRET=<tu_secreto_jwt>
       "user": "string"
     }
     ```
+- **Listar Cita**
+  - **URL:** `/adoptionSystem/v1/appointment/listarCitas`
+  - **Método:** `GET`
+
+ - **Cancelar Cita**
+  - **URL:** `/adoptionSystem/v1/appointment/cancelarCita/:uid`
+  - **Método:** `PUT`
+  - **Cuerpo:**
+    ```json
+     {
+      "status":"CANCELLED"
+    }
+    ```
+
 
 ## Funcionalidades Adicionales
 
