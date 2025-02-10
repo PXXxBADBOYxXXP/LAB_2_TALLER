@@ -79,6 +79,15 @@ JWT_SECRET=<tu_secreto_jwt>
     }
     ```
 
+    - **Actualizar foto de perfil**
+  - **URL:** `/adoptionSystem/v1/user/actualizarFotoPerfil/:uid`
+  - **Método:** `PATCH`
+  - **Cuerpo:**
+    ```json
+    {
+    "profilePicture":"file"
+    }
+    ```
 ### Mascotas
 
 - **Registrar Mascota**
