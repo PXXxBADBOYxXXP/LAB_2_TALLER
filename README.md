@@ -140,7 +140,7 @@ JWT_SECRET=<tu_secreto_jwt>
     ```json
      {
       "status":"CANCELLED"
-    }
+     }
     ```
 
 
