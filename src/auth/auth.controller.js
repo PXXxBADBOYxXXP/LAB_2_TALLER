@@ -25,28 +25,6 @@ export const register = async (req, res) => {
     }
 }
 
-//FUNCION QUE ACTUALIZA FOTO DE PERFIL
-export const actualizarFotoPerfil = async (req, res) => {
-    try {
-        const { uid } = req.params;
-        const  data  = req.body;
-
-        const user = await User.findByIdAndUpdate(uid, data, { new: true });
-
-        res.status(200).json({
-            success: true,
-            msg: 'USUARIO Y FOTO DE PERFIL ACTUALIZADAS',
-            user,
-        });
-    } catch (err) {
-        res.status(500).json({
-            success: false,
-            msg: 'ERROR AL ACTUALIZAR EL USUARIO',
-            error: err.message
-        });
-    }
-}
-
 export const login = async (req, res) => {
     const { email, username, password } = req.body
     try{
